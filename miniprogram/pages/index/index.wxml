@@ -1,0 +1,59 @@
+<view class="index-page">
+  <view class="page-header">
+    <view class="header-top">
+      <text class="page-title">我的家</text>
+      <text class="icon notification-icon">🔔</text>
+    </view>
+  </view>
+
+  <view class="search-container">
+    <view class="search-bar" bindtap="onSearchTap">
+      <text class="icon search-icon">🔍</text>
+      <text class="search-placeholder">搜索物品名称...</text>
+      <text class="icon voice-icon">🎤</text>
+    </view>
+  </view>
+
+  <view class="space-list">
+    <view class="section-title">
+      <text class="section-icon">🏠</text>
+      <text class="section-text">按空间分类</text>
+    </view>
+
+    <view class="space-cards">
+      <block wx:for="{{spaces}}" wx:key="space">
+        <view class="space-card card" bindtap="onSpaceTap" data-space="{{item.space}}">
+          <view class="space-header">
+            <view class="space-icon-text">
+              <text class="space-icon">{{item.icon}}</text>
+              <view class="space-info">
+                <text class="space-name">{{item.space}}</text>
+                <text class="space-count">{{item.count}} 个物品</text>
+              </view>
+            </view>
+            <view class="space-badge">{{item.count}}</view>
+          </view>
+          <view class="space-items">
+            <block wx:for="{{item.items}}" wx:for-item="spaceItem" wx:key="name">
+              <view class="item-tag">
+                <text class="item-emoji">{{spaceItem.emoji}}</text>
+                <text class="item-name">{{spaceItem.name}}</text>
+              </view>
+            </block>
+            <view wx:if="{{item.count > 3}}" class="more-items">
+              +{{item.count - 3}} 更多
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="{{spaces.length === 0 && !isLoading}}" class="empty-state">
+      <text class="empty-icon">📦</text>
+      <text class="empty-text">还没有添加任何物品</text>
+      <text class="empty-hint">点击下方"添加"按钮开始记录</text>
+    </view>
+  </view>
+
+  <view class="floating-btn" bindtap="onAddTap">+</view>
+</view>
