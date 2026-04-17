@@ -1,0 +1,16 @@
+<view class="voice-input">
+  <view wx:if="{{!isRecording}}" class="voice-btn" bindtap="startRecord">
+    <text class="voice-icon">🎤</text>
+  </view>
+  <view wx:else class="recording-container">
+    <view class="recording-animation">
+      <view class="wave"></view>
+      <view class="wave"></view>
+      <view class="wave"></view>
+    </view>
+    <text class="recording-text">正在录音...</text>
+    <view class="stop-btn" bindtap="stopRecord">
+      <text class="stop-icon">■</text>
+    </view>
+  </view>
+</view>
