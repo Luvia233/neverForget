@@ -1,0 +1,72 @@
+<view class="add-page">
+  <view class="page-header">
+    <text class="page-title">添加物品</text>
+  </view>
+
+  <view class="form-container">
+    <view class="form-group">
+      <text class="label">📦 物品名称</text>
+      <view class="input-row">
+        <input class="input" type="text" placeholder="请输入物品名称"
+          value="{{name}}" bindinput="onNameInput" maxlength="30"/>
+        <button class="voice-btn" bindtap="onVoiceInput">
+          <text class="voice-icon">🎤</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="label">🏠 放置空间</text>
+      <picker mode="selector" range="{{spaceOptions}}" bindchange="onSpaceChange">
+        <view class="picker-input">
+          <text class="{{space ? 'picker-value' : 'picker-placeholder'}}">
+            {{space || '请选择放置空间'}}
+          </text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">🗄️ 放置容器</text>
+      <input class="input" type="text" placeholder="例如：抽屉、柜子、盒子"
+        value="{{container}}" bindinput="onContainerInput" maxlength="20"/>
+    </view>
+
+    <view class="form-group">
+      <text class="label">📍 具体位置</text>
+      <input class="input" type="text" placeholder="例如：第一层、左侧"
+        value="{{position}}" bindinput="onPositionInput" maxlength="30"/>
+    </view>
+
+    <view class="form-group">
+      <text class="label">🏷️ 物品分类</text>
+      <picker mode="selector" range="{{categoryOptions}}" bindchange="onCategoryChange">
+        <view class="picker-input">
+          <text class="{{category ? 'picker-value' : 'picker-placeholder'}}">
+            {{category || '请选择物品分类'}}
+          </text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="label">📷 物品照片（可选）</text>
+      <view class="photo-section">
+        <view wx:if="{{photoUrl}}" class="photo-preview">
+          <image src="{{photoUrl}}" mode="aspectFill" class="preview-image"/>
+          <view class="remove-photo" bindtap="onRemovePhoto">×</view>
+        </view>
+        <view wx:else class="add-photo" bindtap="onChoosePhoto">
+          <text class="add-photo-icon">+</text>
+          <text class="add-photo-text">添加照片</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="btn btn-primary submit-btn" bindtap="onSubmit" loading="{{isLoading}}">
+      保存物品
+    </button>
+  </view>
+</view>

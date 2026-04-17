@@ -1,0 +1,92 @@
+.detail-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fffaf5 0%, #ffecd2 100%);
+}
+
+.photo-section {
+  width: 100%;
+  height: 400rpx;
+}
+
+.detail-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-section {
+  padding: 30rpx;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.item-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #5d4e37;
+}
+
+.category-tag {
+  background: linear-gradient(135deg, #fcb69f 0%, #ff9a9e 100%);
+  color: white;
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.info-card {
+  background: white;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 8rpx 24rpx rgba(139, 115, 85, 0.1);
+  margin-bottom: 30rpx;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f5e6d3;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #8b7355;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #5d4e37;
+  font-weight: 600;
+}
+
+.action-section {
+  display: flex;
+  gap: 20rpx;
+}
+
+.edit-btn, .delete-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  height: 88rpx;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+  color: #ff6b6b;
+  border-color: #ffcccc;
+}

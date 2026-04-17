@@ -1,0 +1,46 @@
+<view class="detail-page">
+  <view wx:if="{{item.photoUrl}}" class="photo-section">
+    <image src="{{item.photoUrl}}" mode="aspectFill" class="detail-photo"/>
+  </view>
+
+  <view class="info-section">
+    <view class="info-header">
+      <text class="item-name">{{item.name}}</text>
+      <view class="category-tag">{{item.category || '未分类'}}</view>
+    </view>
+
+    <view class="info-card">
+      <view class="info-row">
+        <text class="info-label">🏠 放置空间</text>
+        <text class="info-value">{{item.space}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.container}}">
+        <text class="info-label">🗄️ 放置容器</text>
+        <text class="info-value">{{item.container}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.position}}">
+        <text class="info-label">📍 具体位置</text>
+        <text class="info-value">{{item.position}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">🕐 添加时间</text>
+        <text class="info-value">{{item.created_at}}</text>
+      </view>
+      <view class="info-row" wx:if="{{item.added_by}}">
+        <text class="info-label">👤 添加人</text>
+        <text class="info-value">{{item.added_by}}</text>
+      </view>
+    </view>
+
+    <view class="action-section">
+      <button class="btn btn-secondary edit-btn" bindtap="onEdit">
+        <text class="btn-icon">✏️</text>
+        <text class="btn-text">编辑</text>
+      </button>
+      <button class="btn btn-secondary delete-btn" bindtap="onDelete">
+        <text class="btn-icon">🗑️</text>
+        <text class="btn-text">删除</text>
+      </button>
+    </view>
+  </view>
+</view>
