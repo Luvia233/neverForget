@@ -1,0 +1,79 @@
+<view class="family-page">
+  <view class="family-header">
+    <view class="family-info">
+      <text class="family-name">{{familyInfo.name}}</text>
+      <text class="family-desc">{{familyInfo.memberCount}} 位成员</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="section-icon">👥</text>
+      <text class="section-text">家庭成员</text>
+    </view>
+    <view class="member-list">
+      <block wx:for="{{members}}" wx:key="_id">
+        <view class="member-item">
+          <view class="member-avatar">
+            <text class="avatar-text">{{item.nickname[0]}}</text>
+          </view>
+          <view class="member-info">
+            <text class="member-name">{{item.nickname}}</text>
+            <text class="member-role">{{item.role === 'owner' ? '房主' : '成员'}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{isOwner}}">
+    <view class="section-title">
+      <text class="section-icon">🔗</text>
+      <text class="section-text">邀请码</text>
+    </view>
+    <view class="invite-card">
+      <view class="invite-code-container">
+        <text class="invite-code">{{inviteCode}}</text>
+        <button class="copy-btn" bindtap="onCopyCode">复制</button>
+      </view>
+      <view class="invite-info">
+        <text class="invite-hint">分享邀请码给家人，让他们加入您的家庭</text>
+        <text class="invite-expire">有效期至 {{inviteExpire}}</text>
+      </view>
+      <button class="btn btn-secondary regenerate-btn" bindtap="onRegenerateCode">
+        重新生成邀请码
+      </button>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{!isOwner}}">
+    <view class="section-title">
+      <text class="section-icon">ℹ️</text>
+      <text class="section-text">关于邀请</text>
+    </view>
+    <view class="info-card">
+      <text class="info-text">只有房主可以生成和分享邀请码</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="section-icon">📊</text>
+      <text class="section-text">统计</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalItems}}</text>
+        <text class="stat-label">物品总数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalSpaces}}</text>
+        <text class="stat-label">空间数量</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalCategories}}</text>
+        <text class="stat-label">分类数量</text>
+      </view>
+    </view>
+  </view>
+</view>
