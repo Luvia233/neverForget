@@ -31,8 +31,14 @@ function getCache(key) {
     
     const data = wx.getStorageSync(cacheKey)
     if (!data) return null
-    
-    return JSON.parse(data)
+
+    try {
+      return JSON.parse(data)
+    } catch (e) {
+      console.error('缓存数据解析失败', e)
+      removeCache(key)
+      return null
+    }
   } catch (e) {
     console.error('缓存读取失败', e)
     return null

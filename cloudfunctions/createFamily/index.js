@@ -7,6 +7,19 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const { familyName, nickname } = event
 
+  if (!familyName || typeof familyName !== 'string' || familyName.trim().length === 0) {
+    return { success: false, error: '请输入家庭名称' }
+  }
+  if (familyName.trim().length > 50) {
+    return { success: false, error: '家庭名称不能超过50个字符' }
+  }
+  if (!nickname || typeof nickname !== 'string' || nickname.trim().length === 0) {
+    return { success: false, error: '请输入昵称' }
+  }
+  if (nickname.trim().length > 30) {
+    return { success: false, error: '昵称不能超过30个字符' }
+  }
+
   try {
     const db = cloud.database()
     const openid = wxContext.openid
@@ -21,7 +34,27 @@ exports.main = async (event, context) => {
 
     const familyId = familyRes._id
 
-    const inviteCode = generateInviteCode(8)
+    let inviteCode
+    let retries = 0
+    const maxRetries = 5
+
+    do {
+      inviteCode = generateInviteCode(8)
+      const existing = await db.collection('invite_codes')
+        .where({ code: inviteCode })
+        .limit(1)
+        .get()
+
+      if (existing.data.length === 0) {
+        break
+      }
+      retries++
+    } while (retries < maxRetries)
+
+    if (!inviteCode) {
+      return { success: false, error: '生成邀请码失败，请重试' }
+    }
+
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
     await db.collection('invite_codes').add({
