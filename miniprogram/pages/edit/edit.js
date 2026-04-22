@@ -15,6 +15,11 @@ Page({
   },
 
   onLoad(options) {
+    if (!options.id) {
+      wx.showToast({ title: '物品不存在', icon: 'none' })
+      setTimeout(() => wx.navigateBack(), 1500)
+      return
+    }
     this.setData({ itemId: options.id })
     this.loadItem()
   },

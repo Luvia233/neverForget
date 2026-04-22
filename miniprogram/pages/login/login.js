@@ -54,6 +54,7 @@ Page({
             fail: (err) => {
               console.error('登录失败', err)
               wx.showToast({ title: '登录失败，请重试', icon: 'none' })
+              this.setData({ isLoading: false })
             },
             complete: () => {
               this.setData({ isLoading: false })

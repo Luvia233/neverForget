@@ -26,7 +26,27 @@ exports.main = async (event, context) => {
       return { success: false, error: '只有房主可以生成邀请码' }
     }
 
-    const newCode = generateInviteCode(8)
+    let newCode
+    let retries = 0
+    const maxRetries = 5
+
+    do {
+      newCode = generateInviteCode(8)
+      const existing = await db.collection('invite_codes')
+        .where({ code: newCode })
+        .limit(1)
+        .get()
+
+      if (existing.data.length === 0) {
+        break
+      }
+      retries++
+    } while (retries < maxRetries)
+
+    if (!newCode) {
+      return { success: false, error: '生成邀请码失败，请重试' }
+    }
+
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
     await db.collection('invite_codes').add({

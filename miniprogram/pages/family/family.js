@@ -95,11 +95,14 @@ Page({
       .then(res => {
         if (res.data.length > 0) {
           const code = res.data[0]
-          const expireDate = new Date(code.expires_at)
-          this.setData({
-            inviteCode: code.code,
-            inviteExpire: this.formatDate(expireDate)
-          })
+          const expiresAt = code.expires_at
+          if (expiresAt) {
+            const expireDate = new Date(expiresAt)
+            this.setData({
+              inviteCode: code.code,
+              inviteExpire: this.formatDate(expireDate)
+            })
+          }
         }
       })
       .catch(err => console.error(err))

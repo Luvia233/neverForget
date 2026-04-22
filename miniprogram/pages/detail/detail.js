@@ -21,8 +21,14 @@ Page({
           if (item) {
             item.created_at = this.formatDate(item.created_at)
             this.setData({ item })
+          } else {
+            wx.showToast({ title: '物品不存在', icon: 'none' })
+            setTimeout(() => wx.navigateBack(), 1500)
           }
         }
+      },
+      fail: () => {
+        wx.showToast({ title: '加载失败', icon: 'none' })
       }
     })
   },
